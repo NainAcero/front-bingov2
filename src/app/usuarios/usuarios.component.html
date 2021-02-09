@@ -1,0 +1,229 @@
+<app-header></app-header>
+
+<!-- Modal -->
+<div class="modal fade" id="bingoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CARTILLAS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="" *ngIf="cartillas.length > 0">
+            <swiper [config]="swiperConfig" class="pr-xl-2">
+              <ng-container *ngFor="let cartilla of cartillas">
+
+                <ng-template swiperSlide>
+                  <div class="mb-3">
+                    <a href="{{ url }}/{{ cartilla.url }}.pdf" target="_black" class="btn btn-primary"><i class="fas fa-cloud-download-alt"></i></a>
+                  </div>
+                  <div class="card border-primary cartilla-modal" style="background: #007bff">
+                    <div class="card-body text-primary bingo-body">
+                        <div class="d-flex bingo-title">
+                          <div class="col-5th text-center bingo-square h1">B</div>
+                          <div class="col-5th text-center bingo-square h1">I</div>
+                          <div class="col-5th text-center bingo-square h1">N</div>
+                          <div class="col-5th text-center bingo-square h1">G</div>
+                          <div class="col-5th text-center bingo-square h1">O</div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-5th" *ngFor="let item of cartilla.talonario">
+                            <div class="text-center bingo-square" [ngClass]="item.salio? 'bg-danger text-white': 'bg-white text-dark'"
+                            style="border: 2px solid #007bff;">
+                              <span class="bingo-number">
+                                <div *ngIf="item.numero == 0"><img src="/assets/logo.png" alt="logo ciis" width="50"></div>
+                                <div *ngIf="item.numero != 0">{{ item.numero }}</div>
+                              </span>
+                          </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </swiper>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade crear-cartilla" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h4 class="modal-title " id="exampleModalLongTitle">BINGO</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card border-primary" style="background: #007bff">
+          <input type="text" class="form-control" [(ngModel)]="talonario.code" placeholder="Código">
+          <input type="text" class="form-control" [(ngModel)]="numeroVal" (change)="changeData()" placeholder="Cartilla">
+          <div class="card-body text-primary">
+
+                <table class="table table-bordered text-center" style="background: white">
+                  <tbody>
+
+                      <tr *ngFor="let fila of filas ; let i = index">
+                          <td *ngFor="let columna of columnas ; let j = index;">
+                            <div class="text-white" style="border: 2px solid white;border-radius: 50%;" *ngIf="(i != 2 || j != 2); else logo">
+                              <input type="text" style="width:70px;font-size: 25px;text-align: center;" name="numero[]" id="numero[{{i}}][{{j}}]" >
+                            </div>
+                            <ng-template #logo>
+                              <div class="logo-cartilla">
+                                <img src="/assets/logo.png" alt="logo ciis" width="60">
+                              </div>
+                            </ng-template>
+                          </td>
+                      </tr>
+
+                  </tbody>
+                </table>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='guardar()'>Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade number-cartilla" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h4 class="modal-title " id="exampleModalLongTitle">BINGO</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="post">
+          <div class="form-group">
+            <label for="nombre">Inicio</label>
+            <input type="number" [(ngModel)]="inicio" name="inicio" class="form-control" placeholder="Ingrese Inicio" autofocus required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Fin</label>
+            <input type="number" [(ngModel)]="fin" name="fin" class="form-control"  placeholder="Ingrese Fin" autofocus required>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='guardar_number()'>Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="registerUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">REGISTRAR USUARIO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="post">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" id="nombre" placeholder="Ingrese su Nombre" autofocus required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" [(ngModel)]="usuario.email" class="form-control" name="email" id="email" placeholder="Ingrese su Email" autofocus required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" [(ngModel)]="usuario.telefono" class="form-control" name="telefono" id="telefono" placeholder="Ingrese su Telefono" autofocus>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)='registrar()'>REGISTRAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="font-weight-bold text-dark">
+    <h2 class="title">Listado de Usuarios</h2>
+  </div>
+  <div class="card border-0 mb-5">
+    <div class="card-body">
+        <div class="my-2 text-right">
+          <button  class="btn btn-rounded btn-primary" type="button" data-toggle="modal" data-target="#registerUser">Registrar Usuario</button>
+          <button  class="btn btn-rounded btn-success ml-2" type="button"  data-toggle="modal" data-target=".crear-cartilla" (click)='reset_usuario()'><i class="fas fa-download"></i></button>
+        </div>
+
+        <!-- Search form -->
+        <div class="md-form mt-3 mb-4" *ngIf="usuarios?.length>0">
+          <input class="form-control" [(ngModel)]="buscar" type="text" placeholder="Search"
+            aria-label="Search" (keyup.enter)="buscarUsuario()" (ngModelChange)="valuechange($event)">
+        </div>
+
+        <div *ngIf="usuarios?.length == 0" class="alert alert-info">
+          No hay registros en la base de datos!
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="table table-bordered table-striped" *ngIf="usuarios?.length>0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td><i class="fas fa-blog" [ngStyle]="{'color': usuario.online? 'blue' : 'red'}"></i></td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.role }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td class="text-nowrap text-center">
+                      <button class="btn btn-primary" data-toggle="modal" data-target=".crear-cartilla" (click)='guardar_usuario(usuario)'><i class="fas fa-trophy"></i></button>
+                      <button class="btn btn-warning ml-2 text-white" data-toggle="modal" data-target=".number-cartilla" (click)='guardar_usuario(usuario)'><i class="fas fa-trophy"></i></button>
+                      <button class="btn btn-success ml-2" (click)="showBingos(usuario._id)" data-toggle="modal" data-target="#bingoModal"><i class="fas fa-sort-numeric-up-alt"></i></button>
+                      <button class="btn btn-danger ml-2"><i class="fas fa-user-times"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
+      <app-paginate *ngIf="paginador" [paginador] = "paginador"></app-paginate>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

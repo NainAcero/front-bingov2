@@ -1,0 +1,182 @@
+<app-header></app-header>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="number" [(ngModel)]="numberDelete" class="form-control"  placeholder="Ingrese Número">
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="bingoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CARTILLAS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card border-primary cartilla-modal" style="background: #007bff" *ngIf="talonario != null">
+          <div class="card-body text-primary bingo-body">
+              <div class="d-flex bingo-title">
+                <div class="col-5th text-center bingo-square h1">B</div>
+                <div class="col-5th text-center bingo-square h1">I</div>
+                <div class="col-5th text-center bingo-square h1">N</div>
+                <div class="col-5th text-center bingo-square h1">G</div>
+                <div class="col-5th text-center bingo-square h1">O</div>
+              </div>
+
+              <div class="row">
+                <div class="col-5th" *ngFor="let item of talonario.talonario">
+                  <div class="text-center bingo-square" [ngClass]="item.salio? item.color + ' text-white': 'bg-white text-dark'"
+                  style="border: 2px solid #007bff;">
+                    <span class="bingo-number">
+                      <div *ngIf="item.numero == 0"><img src="/assets/logo.png" alt="logo ciis" width="50"></div>
+                      <div *ngIf="item.numero != 0">{{ item.numero }}</div>
+                    </span>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="background:#e6e6e6;">
+  <div class="">
+    <h2 class="font-weight-bold text-dark title">ADMINISTRACIÓN DEL BINGO</h2>
+  </div>
+  <div class="mb-5">
+    <div class="card-body text-primary">
+        <div class="d-flex justify-content-between flex-column flex-lg-row">
+          <div class="d-flex align-items-center mb-4 justify-content-center flex-column flex-md-row">
+            <h5 class="card-title text-dark font-weight-bold col-md-2 col-lg-4 text-center mb-0">Bolilla {{bolillas.length}}/75</h5>
+            <ng-container *ngFor="let item of bolillas; let last = last;">
+              <div class="bolilla bolilla-1 my-2 my-md-0" *ngIf="last">
+                  <div class="new">
+                    <span class="bolilla-letra" *ngIf="item >= 1 && item <= 15;else i">B</span>
+                    <ng-template #i>
+                      <span class="bolilla-letra" *ngIf="item > 15 && item <= 30;else n">I</span>
+                    </ng-template>
+                    <ng-template #n>
+                      <span class="bolilla-letra" *ngIf="item > 30 && item <= 45;else g">N</span>
+                    </ng-template>
+                    <ng-template #g>
+                      <span class="bolilla-letra" *ngIf="item > 45 && item <= 60;else o">G</span>
+                    </ng-template>
+                    <ng-template #o>
+                      <span class="bolilla-letra" *ngIf="item > 60 && item <= 75">O</span>
+                    </ng-template>
+                    {{ item }}</div>
+              </div>
+            </ng-container>
+            <div class="card border-0" style="border-radius: 35px;">
+              <div class="text-primary">
+                  <div class="d-flex flex-column-reverse ball-box-admin">
+                    <ng-container *ngFor="let item of bolillas; let last = last;">
+                      <div class="bolilla" *ngIf="!last">
+                          <div class="new">
+                            <span class="bolilla-letra" *ngIf="item >= 1 && item <= 15;else i">B</span>
+                            <ng-template #i>
+                              <span class="bolilla-letra" *ngIf="item > 15 && item <= 30;else n">I</span>
+                            </ng-template>
+                            <ng-template #n>
+                              <span class="bolilla-letra" *ngIf="item > 30 && item <= 45;else g">N</span>
+                            </ng-template>
+                            <ng-template #g>
+                              <span class="bolilla-letra" *ngIf="item > 45 && item <= 60;else o">G</span>
+                            </ng-template>
+                            <ng-template #o>
+                              <span class="bolilla-letra" *ngIf="item > 60 && item <= 75">O</span>
+                            </ng-template>
+                            {{ item }}</div>
+                      </div>
+                    </ng-container>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="my-2 mx-auto mx-lg-0 text-right">
+            <div class="md-form mt-3 mb-4 input-group">
+              <input class="form-control" [(ngModel)]="numero" type="number" (keyup.enter)="sacar_numero()"  placeholder="Ingresar Número" #myInput >
+              <div class="input-group-append">
+                <button class="btn btn-rounded btn-primary" type="button" (click)="sacar_numero()">Sacar Número</button>
+              </div>
+            </div>
+            <div class="md-form mt-3 mb-4 input-group">
+              <input class="form-control" [(ngModel)]="letra" type="text" (keyup.enter)="update_Letra()"  placeholder="Ingrese la letra" >
+              <div class="input-group-append">
+                <button class="btn btn-rounded btn-primary" type="button" (click)="update_Letra()">Registrar Letra</button>
+              </div>
+            </div>
+            <button class="btn btn-rounded btn-warning text-white " type="button" (click)="resetear()"><i class="fas fa-hourglass-start"></i></button>
+            <button class="btn btn-rounded btn-primary ml-4" type="button" (click)="actualizar()"><i class="far fa-star"></i></button>
+            <button class="btn btn-rounded btn-danger ml-4" type="button" data-toggle="modal" data-target="#deleteModal" ><i class="far fa-trash-alt"></i></button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table id="drawTable" class="bingo-table bingo-table-hover bingo-table-striped mt-3">
+            <tbody>
+              <tr class="minHeightTable" *ngFor="let item of elementos; let i = index">
+                <th class="text-center">{{ bingo[i] }}</th>
+                <td class="text-center align-middle" *ngFor="let numero of item"
+                [ngClass]="numero.salio? 'bg-danger text-white': 'bg-white text-dark'">
+                  <label class="d-flex align-items-center justify-content-center">
+                    <span class="">{{ numero.numero }}</span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <table class="table table-bordered table-striped mt-2" *ngIf="users?.length>0">
+          <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Code</th>
+                  <th>Hora</th>
+                  <th>Cartilla</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users" >
+                  <td>{{ user.nombre }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.telefono }}</td>
+                  <td>{{ user.code }}</td>
+                  <td>{{ user.hour }} Hour. - {{ user.minutos }} Min. - {{ user.segundos }} Seg.</td>
+                  <td><button type="button" class="btn btn-success" data-toggle="modal" (click)="showBingos(user.code)" data-target="#bingoModal"><i class="fas fa-location-arrow"></i></button></td>
+                </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

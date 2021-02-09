@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+
+<div class="container-fluid">
+  <div class="card border-0 mb-5">
+    <div class="card-body">
+
+        <!-- Search form -->
+        <div class="md-form mt-3 mb-4">
+          <input class="form-control" [(ngModel)]="buscar" type="text" placeholder="Search"
+            aria-label="Search" (keyup.enter)="buscarTalonario()">
+        </div>
+
+        <div class="slider-container col-xl-5 my-xl-5">
+
+            <div class="card border-primary cartilla-modal" style="background: #007bff" *ngIf="talonario != null">
+              <div class="card-body text-primary bingo-body">
+                  <div class="d-flex bingo-title">
+                    <div class="col-5th text-center bingo-square h1">B</div>
+                    <div class="col-5th text-center bingo-square h1">I</div>
+                    <div class="col-5th text-center bingo-square h1">N</div>
+                    <div class="col-5th text-center bingo-square h1">G</div>
+                    <div class="col-5th text-center bingo-square h1">O</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5th" *ngFor="let item of talonario.talonario">
+                      <div class="text-center bingo-square" [ngClass]="item.salio? item.color + ' text-white': 'bg-white text-dark'"
+                      style="border: 2px solid #007bff;">
+                        <span class="bingo-number">
+                          <div *ngIf="item.numero == 0"><img src="/assets/logo.png" alt="logo ciis" width="50"></div>
+                          <div *ngIf="item.numero != 0">{{ item.numero }}</div>
+                        </span>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

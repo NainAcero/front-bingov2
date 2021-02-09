@@ -1,0 +1,52 @@
+#drawTable th {
+  background-color: #1351db;
+  width: 40px;
+  font-size: 1.8em;
+  font-weight: 700;
+  color: white;
+  padding: 5px 10px;
+  position: sticky;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.bingo-table tr:not(:last-of-type) td, .bingo-table tr:not(:last-of-type) th{
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  }
+
+#drawTable {
+  border: 1px solid #1351db;
+  border-spacing: 5px;
+  border-left: 0;
+}
+.bingo-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.bingo-table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.bingo-table-striped tbody tr:nth-of-type(odd) {
+  background: #fafafa;
+}
+.uk-overflow-container>:last-child {
+  margin-bottom: 0;
+}
+#drawTable td {
+  width: 57px;
+  height: 67px;
+  color: #8b8a8a;
+  border: 1px solid #8b8a8a;
+  line-height: 1;
+  padding: 2px 5px;
+  box-sizing: border-box;
+}
+
+#drawTable td label {
+  font-size: 30px;
+  margin-bottom: 0;
+}

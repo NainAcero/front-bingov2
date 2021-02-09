@@ -1,0 +1,23 @@
+<ul *ngIf="paginador?.total > 0" class="pagination">
+
+  <li class="page-item" *ngIf="paginador.skip > 0">
+    <a class="page-link" [routerLink]="['/usuarios/page', paginador.skip-4]">&laquo;</a>
+  </li>
+
+  <li class="disabled page-item">
+    <a class="page-link">Primera</a>
+  </li>
+
+  <li class="page-item" *ngFor="let item of paginas; let i = index" [ngClass]="paginador.skip == item?'active':''">
+    <span class="page-link" [routerLink]="['/usuarios/page', item]" >{{ i + 1 }}</span>
+  </li>
+
+  <li class="disabled page-item">
+    <a class="page-link" >Última</a>
+  </li>
+
+  <li class="page-item" *ngIf="paginador.skip < totalPaginas * 4 - 4">
+    <a class="page-link" [routerLink]="['/usuarios/page', paginador.skip + 4]">&raquo;</a>
+  </li>
+
+</ul>

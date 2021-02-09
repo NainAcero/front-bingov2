@@ -1,0 +1,124 @@
+<app-header></app-header>
+<div id="fb-root"></div>
+
+<div class="container-fluid">
+  <div class="row justify-content-around">
+
+    <div class="col-xl-6 d-flex flex-column-reverse flex-xl-column">
+      <div class="my-5">
+        <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+          <h5 class="card-title text-dark font-weight-bold col-md-2 mb-0 text-center">Bolilla {{bolillas.length}}/75</h5>
+          <ng-container *ngFor="let item of bolillas; let last = last;">
+            <div class="bolilla bolilla-1 my-2 my-md-0" *ngIf="last">
+                <div class="new">
+                  <span class="bolilla-letra" *ngIf="item >= 1 && item <= 15;else i">B</span>
+                  <ng-template #i>
+                    <span class="bolilla-letra" *ngIf="item > 15 && item <= 30;else n">I</span>
+                  </ng-template>
+                  <ng-template #n>
+                    <span class="bolilla-letra" *ngIf="item > 30 && item <= 45;else g">N</span>
+                  </ng-template>
+                  <ng-template #g>
+                    <span class="bolilla-letra" *ngIf="item > 45 && item <= 60;else o">G</span>
+                  </ng-template>
+                  <ng-template #o>
+                    <span class="bolilla-letra" *ngIf="item > 60 && item <= 75">O</span>
+                  </ng-template>
+                  {{ item }}</div>
+            </div>
+          </ng-container>
+          <div class="card border-primary" style="border-radius: 35px;">
+            <div class="text-primary">
+                <div class="d-flex flex-row-reverse ball-box">
+                  <ng-container *ngFor="let item of bolillas; let last = last;">
+                    <div class="bolilla" *ngIf="!last">
+                        <div class="new">
+                          <span class="bolilla-letra" *ngIf="item >= 1 && item <= 15;else i">B</span>
+                          <ng-template #i>
+                            <span class="bolilla-letra" *ngIf="item > 15 && item <= 30;else n">I</span>
+                          </ng-template>
+                          <ng-template #n>
+                            <span class="bolilla-letra" *ngIf="item > 30 && item <= 45;else g">N</span>
+                          </ng-template>
+                          <ng-template #g>
+                            <span class="bolilla-letra" *ngIf="item > 45 && item <= 60;else o">G</span>
+                          </ng-template>
+                          <ng-template #o>
+                            <span class="bolilla-letra" *ngIf="item > 60 && item <= 75">O</span>
+                          </ng-template>
+                          {{ item }}</div>
+                    </div>
+                  </ng-container>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 m-xl-0">
+        <div class="text-white mx-auto" style="max-width: 600px;">
+            <div class="sub-title py-2 px-3 bg-blue text-center">TRANSMISIÓN - LETRA {{ letra }}</div>
+            <div class="m-0">
+
+              <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FPromoESIS%2Fvideos%2F251088286619270%2F&width=1280" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="slider-container col-xl-5 my-xl-5" *ngIf="cartillas.length > 0; else banner" style="height: 80vh;">
+      <swiper [config]="swiperConfig" class="p-xl-2">
+        <ng-container *ngFor="let cartilla of cartillas">
+          <ng-template swiperSlide>
+            <div class="card border-primary cartilla" style="background: #007bff">
+              <div class="card-body text-primary bingo-body">
+                  <div class="d-flex bingo-title">
+                    <div class="col-5th text-center bingo-square h1">B</div>
+                    <div class="col-5th text-center bingo-square h1">I</div>
+                    <div class="col-5th text-center bingo-square h1">N</div>
+                    <div class="col-5th text-center bingo-square h1">G</div>
+                    <div class="col-5th text-center bingo-square h1">O</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5th" *ngFor="let item of cartilla.talonario">
+                      <div class="text-center bingo-square" [ngClass]="item.salio? 'bg-danger text-white': 'bg-white text-dark'"
+                      style="border: 2px solid #007bff;">
+                        <span class="bingo-number">
+                          <div *ngIf="item.numero == 0"><img src="/assets/logo.png" alt="logo ciis" width="50"></div>
+                          <div *ngIf="item.numero != 0">{{ item.numero }}</div>
+                        </span>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h5 class="text-center mt-1">Código: {{ cartilla.code }}</h5>
+              <button class="btn btn-primary" (click)='bingo(cartilla.code)'>BINGO</button>
+            </div>
+          </ng-template>
+        </ng-container>
+      </swiper>
+      <div class="text-center" >
+      </div>
+    </div>
+
+    <ng-template #banner>
+      <div class="col-4">
+        <div class="card mt-5 mb-5">
+          <div class="card-body text-primary">
+            <img src="/assets/banner.jpeg" alt="bingo banner" width="100%">
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>
