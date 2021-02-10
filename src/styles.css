@@ -149,6 +149,15 @@ a:hover {
     align-items: center;
 }
 
+.admin .bingo-square {
+    min-height: 64px;
+    margin-bottom: 0;
+}
+
+.admin .card-body{
+    padding: .3rem 1.25rem;
+}
+
 .card-body.bingo-body {
     padding: 1.25rem 2rem;
 }
@@ -186,7 +195,7 @@ a:hover {
 
 .container-fluid .title {
     margin-bottom: 0;
-    padding: 2.5rem 1.25rem;
+    padding: 2.5rem 1.25rem 1rem;
 }
 
 .ball-box {
@@ -318,3 +327,18 @@ a:hover {
     font-size: 18px;
     line-height: 1.6;
 } */
+
+
+.col-30 {
+    flex: 0 0 30%;
+    max-width: 30%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-70 {
+    flex: 0 0 70%;
+    max-width: 70%;
+    padding-right: 15px;
+    padding-left: 15px;
+}

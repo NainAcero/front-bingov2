@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import Swal from 'sweetalert2';
 import { SocketService } from '../home/socket.service';
 import { AuthService } from '../login/auth.service';
-import { Talonario } from '../models/talonario';
 import { BolillaService } from '../services/bolilla.service';
 import { LetraService } from '../services/letra.service';
 import { TalonarioService } from '../services/talonario.service';
@@ -18,6 +17,7 @@ export class AdministracionComponent implements OnInit, AfterViewInit  {
   bolillas:number[] = [];
   letra: String = "";
   uid: String = "";
+  buscar: String;
   numero: Number;
   numberDelete: Number;
   bingo = ["B","I","N","G","O"];
@@ -336,6 +336,17 @@ export class AdministracionComponent implements OnInit, AfterViewInit  {
         showConfirmButton: false,
         timer: 1500
       })
+    });
+  }
+
+  buscarTalonario(){
+
+    this._talonarioService.getTalonarioById(this.buscar).subscribe(response => {
+      this.talonario = response.data;
+      this.buscar = "";
+      if(this.letra == "C" || this.letra == "c") this.ciis_c();
+      if(this.letra == "II" || this.letra == "ii") this.ciis_ii();
+      if(this.letra == "S" || this.letra == "s") this.ciis_s();
     });
   }
 }

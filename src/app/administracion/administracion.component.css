@@ -1,6 +1,6 @@
 #drawTable th {
   background-color: #1351db;
-  width: 40px;
+  width: 70px;
   font-size: 1.8em;
   font-weight: 700;
   color: white;
@@ -38,7 +38,7 @@
 }
 #drawTable td {
   width: 57px;
-  height: 67px;
+  height: 54px;
   color: #8b8a8a;
   border: 1px solid #8b8a8a;
   line-height: 1;
@@ -47,6 +47,6 @@
 }
 
 #drawTable td label {
-  font-size: 30px;
+  font-size: 28px;
   margin-bottom: 0;
 }
