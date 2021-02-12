@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import SwiperCore, { Mousewheel, Pagination } from "swiper/core";
 import { AuthService } from '../login/auth.service';
 import { BolillaService } from '../services/bolilla.service';
+import { LetraService } from '../services/letra.service';
 import { TalonarioService } from '../services/talonario.service';
 import { SocketService } from './socket.service';
-import Swal from 'sweetalert2';
-import { LetraService } from '../services/letra.service';
 
 SwiperCore.use([Pagination,Mousewheel]);
 @Component({
@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
       mousewheel: true,
       pagination: {
       clickable: true,
+      dynamicBullets: true,
+      dynamicMainBullets: 4,
       renderBullet: function (index, className) {
         return '<span class="' + className + '">' + (index + 1) + '</span>';
       }

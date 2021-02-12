@@ -190,7 +190,7 @@ a:hover {
  }
 
 .cartilla {
-    margin: 0 50px;
+    margin: 0 42px;
 }
 
 .container-fluid .title {
@@ -234,20 +234,20 @@ a:hover {
 
 .swiper-pagination-bullet {
     width: 35px;
-    height: 40px;
-    border-radius: 0;
+    height: 35px;
+    border-radius: 2px;
     text-align: center;
-    line-height: 40px;
+    line-height: 35px;
     font-size: 15px;
     font-weight: 600;
     color:#1351db;
     opacity: 1;
     border: 1px solid #b9babd;
-    border-bottom: 0;
+    /* border-bottom: 0; */
     background: #fff;
   }
 
-  .swiper-pagination-bullet:last-child {
+  /* .swiper-pagination-bullet:last-child {
     border-bottom: 1px solid #b9babd;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px ;
@@ -256,7 +256,7 @@ a:hover {
   .swiper-pagination-bullet:first-child{
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
-  }
+  } */
 
   .swiper-pagination-bullet-active {
     color:#fff;
@@ -273,12 +273,24 @@ a:hover {
   }
 
   .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{
-      margin: 0;
+      margin: 4px 0;
   }
 
   .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
     margin: 0;
   }
+
+  .swiper-container-vertical>.swiper-pagination-bullets {
+    right: 2px;
+  }
+
+  .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
+    transform: scale(.5);
+}
+/* .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+    transform: scale(.5);
+} */
+
   .overflow-x-auto{
       overflow-x: auto;
   }
@@ -341,4 +353,8 @@ a:hover {
     max-width: 70%;
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.swiper-container-vertical>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+    width: 37px;
 }
