@@ -19,15 +19,19 @@ export class HomeComponent implements OnInit {
   cartillas = [];
   letra: string = "";
   swiperConfig = {
-      direction : 'vertical',
       spaceBetween: 10,
       mousewheel: true,
       pagination: {
       clickable: true,
       dynamicBullets: true,
-      dynamicMainBullets: 4,
+      dynamicMainBullets: 3,
       renderBullet: function (index, className) {
         return '<span class="' + className + '">' + (index + 1) + '</span>';
+      }
+    },
+    breakpoints:{
+      578:{
+        direction : 'vertical'
       }
     }
   };
