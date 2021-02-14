@@ -378,3 +378,7 @@ a:hover {
         height: 200px !important;
     }
  }
+
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: unset;
+}
